@@ -122,10 +122,13 @@ public class Ledger {
                     previousMonth();
                     break;
                 case 3:
+                    yearToDate();
                     break;
                 case 4:
+                    previousYear();
                     break;
                 case 5:
+                    searchByVendor();
                     break;
                 case 0:
                     running = false;
