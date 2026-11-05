@@ -9,6 +9,10 @@ import java.util.Scanner;
 public class Ledger {
     private static ArrayList<Transaction> transactions = TransactionFileManager.loadTransactions();
 
+    public static void refreshTransactions() {
+        transactions = TransactionFileManager.loadTransactions();
+    }
+
     public static void displayTransactions() {
         DateTimeFormatter fmt =
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -60,17 +64,19 @@ public class Ledger {
     public void ledgerMenu() {
         Scanner scanner = new Scanner(System.in);
         String menu = """
+                *********************************
                 o A) Display All
-                o D) Deposits - Display only the entries that are deposits into the account
-                o P) Payments - Display only the negative entries (or payments)
-                o R) Reports - A new screen that allows the user to run pre-defined reports or
-                o H) Home - go back to the home page
+                o D) Deposits
+                o P) Payments
+                o R) Reports 
+                o H) Home 
+                *********************************
                 """;
         boolean running = true;
 
         while (running) {
             System.out.println(menu);
-            System.out.print("please enter your choice: ");
+            System.out.print("please select one of the options above: ");
             String choice = scanner.nextLine();
             choice = choice.toUpperCase();
             switch (choice) {
@@ -100,13 +106,14 @@ public class Ledger {
     public static void reportsMenu() {
         Scanner scanner = new Scanner(System.in);
         String reports = """
+                *********************************
                 1) Month To Date
                 2) Previous Month
                 3) Year To Date
                 4) Previous Year
-                5) Search by Vendor - prompt the user for the vendor name and
-                display all entries for that vendor
-                0) Back - go back to the Ledger page
+                5) Search by Vendor
+                0) Back
+                *********************************
                 """;
         boolean running = true;
         while (running) {

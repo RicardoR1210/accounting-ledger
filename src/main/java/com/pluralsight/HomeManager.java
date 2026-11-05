@@ -6,20 +6,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class HomeManager {
-public static void HomeScreen(){
+public static void homeScreen(){
     Ledger ledger = new Ledger();
     Scanner scanner = new Scanner(System.in);
     String homeMenu = """
-            D) Add Deposit - prompt the user for the deposit information and
-            save it to the CSV file
-            P) Make Payment (Debit) - prompt the user for the debit information
-            and save it to the CSV file
-            L) Ledger - display the ledger screen
-            X) Exit - exit the application
+            *********************************
+            o D) Add Deposit
+            o P) Make Payment (Debit)
+            o L) Ledger
+            o X) Exit
+            *********************************
             """;
-    System.out.println(homeMenu);
     boolean running = true;
     while (running) {
+        System.out.println(homeMenu);
+        System.out.print("please select one of the options above: ");
         String userInput = scanner.nextLine();
         userInput = userInput.toUpperCase();
         switch (userInput) {
@@ -56,6 +57,7 @@ public static void addDeposit(){
     String vendorName = scanner.nextLine();
     System.out.println("Please enter deposit amount:");
     double depositAmount = scanner.nextDouble();
+    scanner.nextLine();
     depositAmount = Math.abs(depositAmount);
     Transaction deposit = new Transaction(date, time, itemDescription, vendorName, depositAmount);
     transactionFileManager.saveTransaction(deposit);
