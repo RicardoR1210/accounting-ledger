@@ -180,7 +180,22 @@ public class Ledger {
 
         }
     }
-    
+    public static void previousYear(){
+        LocalDate today = LocalDate.now();
+        int year = today.getYear();
+
+        int previousYear = year-1;
+
+        for(Transaction transactionMonth : transactions) {
+            LocalDate dateTime = LocalDate.parse(transactionMonth.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            if (dateTime.getYear() == previousYear) {
+                System.out.println(transactionMonth);
+            }
+        }
+
+
+    }
+
 
 
 }
