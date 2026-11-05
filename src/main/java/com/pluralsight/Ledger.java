@@ -202,6 +202,8 @@ public class Ledger {
         for(Transaction vendorTransaction : transactions) {
             if(vendorTransaction.getVendor().equalsIgnoreCase(vendorName)) {
                 System.out.println(vendorTransaction);
+            }else{
+                System.out.println("Sorry couldn't find this vendor");
             }
         }
     }
