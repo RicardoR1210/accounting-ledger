@@ -6,41 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class HomeManager {
-public static void homeScreen(){
-    Ledger ledger = new Ledger();
-    Scanner scanner = new Scanner(System.in);
-    String homeMenu = """
-            *********************************
-            o D) Add Deposit
-            o P) Make Payment (Debit)
-            o L) Ledger
-            o X) Exit
-            *********************************
-            """;
-    boolean running = true;
-    while (running) {
-        System.out.println(homeMenu);
-        System.out.print("please select one of the options above: ");
-        String userInput = scanner.nextLine();
-        userInput = userInput.toUpperCase();
-        switch (userInput) {
-            case "D":
-                addDeposit();
-                break;
-            case "P":
-                makePayments();
-                break;
-            case "L":
-                ledger.ledgerMenu();
-                break;
-            case "X":
-                running = false;
-                break;
-            default:
-                System.out.println("Invalid input");
-        }
-    }
-}
+
 public static void addDeposit(){
     TransactionFileManager transactionFileManager = new TransactionFileManager();
     Scanner scanner = new Scanner(System.in);
