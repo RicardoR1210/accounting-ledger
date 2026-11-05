@@ -11,7 +11,7 @@ public class Ledger {
 
     public static void displayTransactions() {
         DateTimeFormatter fmt =
-                DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss");
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         if (transactions.isEmpty()) {
             System.out.println("No transactions found");
