@@ -23,6 +23,7 @@ public class TransactionFileManager {
             BufferedReader br = new BufferedReader(new FileReader("Transactions.csv"));
             String line;
             while ((line = br.readLine()) != null) {
+                if (!line.isEmpty()) {
                 String[] data = line.split(Pattern.quote("|"));
                 String date = data[0];
                 String time = data[1];
@@ -30,6 +31,7 @@ public class TransactionFileManager {
                 String vendor = data[3];
                 double amount = Double.parseDouble(data[4]);
                 transactions.add(new Transaction(date,time,description,vendor,amount));
+                }
             }
             br.close();
         }catch(IOException e) {

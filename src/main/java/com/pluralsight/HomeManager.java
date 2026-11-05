@@ -1,6 +1,8 @@
 package com.pluralsight;
 
-import java.util.Locale;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class HomeManager {
@@ -39,9 +41,27 @@ public static void HomeScreen(){
     }
 }
 public static void addDeposit(){
+    TransactionFileManager transactionFileManager = new TransactionFileManager();
+    Scanner scanner = new Scanner(System.in);
+    LocalDate depositDate = LocalDate.now();
+    LocalTime depositTime = LocalTime.now();
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+    String date = depositDate.toString();
+    String time = depositTime.format(fmt);
+
+    System.out.println("Please enter Item description:");
+    String itemDescription = scanner.nextLine();
+    System.out.println("Please enter vendor name:");
+    String vendorName = scanner.nextLine();
+    System.out.println("Please enter deposit amount:");
+    double depositAmount = scanner.nextDouble();
+    depositAmount = Math.abs(depositAmount);
+    Transaction deposit = new Transaction(date, time, itemDescription, vendorName, depositAmount);
+    transactionFileManager.saveTransaction(deposit);
+    System.out.println("Deposit has been saved successfully.");
 
 }
 public static void makePayments(){
-
 }
 }
