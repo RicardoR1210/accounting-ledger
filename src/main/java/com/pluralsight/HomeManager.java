@@ -63,5 +63,28 @@ public static void addDeposit(){
 
 }
 public static void makePayments(){
-}
+    TransactionFileManager transactionFileManager = new TransactionFileManager();
+    Scanner scanner = new Scanner(System.in);
+    LocalDate paymentDate = LocalDate.now();
+    LocalTime paymentTime = LocalTime.now();
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+    String date = paymentDate.toString();
+    String time = paymentTime.format(fmt);
+
+    System.out.println("Please enter Item description:");
+    String itemDescription = scanner.nextLine();
+    System.out.println("Please enter vendor name:");
+    String vendorName = scanner.nextLine();
+    System.out.println("Please enter payment amount:");
+    double paymentAmount = scanner.nextDouble();
+    scanner.nextLine();
+    if(paymentAmount > 0){
+        paymentAmount *= -1;
+    }
+    Transaction payment = new Transaction(date, time, itemDescription, vendorName, paymentAmount);
+    transactionFileManager.saveTransaction(payment);
+    System.out.println("payment has been saved successfully.");
+
+    }
 }
