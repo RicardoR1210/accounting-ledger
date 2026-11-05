@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ledger {
-    private  ArrayList<Transaction> transactions = TransactionFileManager.loadTransactions();
+    private static ArrayList<Transaction> transactions = TransactionFileManager.loadTransactions();
 
-    public void displayTransactions() {
+    public static void displayTransactions() {
         DateTimeFormatter fmt =
                 DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss");
 
@@ -29,7 +29,7 @@ public class Ledger {
                         String dateTime1 = getTransaction1.getDate() + " " + getTransaction1.getTime();
                         LocalDateTime dateTime2 = LocalDateTime.parse(dateTime1, fmt);
                         LocalDateTime dateTimeCombined = LocalDateTime.parse(dateTime, fmt);
-
+                        //is before is like compareTo
                         if(dateTimeCombined.isBefore(dateTime2)) {//first transaction happened before the second transaction.
                             //swaping to sort by newest
                             transactions.set(j, getTransaction1);
@@ -42,7 +42,7 @@ public class Ledger {
             }
         }
     }
-    public void displayDeposits() {
+    public static void displayDeposits() {
         for (Transaction t : transactions) {
             if (t.getAmount() > 0){
                 System.out.println(t);
@@ -50,7 +50,7 @@ public class Ledger {
 
         }
     }
-    public void displayPayments() {
+    public static void displayPayments() {
         for (Transaction t : transactions) {
             if (t.getAmount() < 0){
                 System.out.println(t);
@@ -97,7 +97,7 @@ public class Ledger {
 
         }
     }
-    public void reportsMenu() {
+    public static void reportsMenu() {
         Scanner scanner = new Scanner(System.in);
         String reports = """
                 1) Month To Date
@@ -119,6 +119,7 @@ public class Ledger {
                     monthToDate();
                     break;
                 case 2:
+                    previousMonth();
                     break;
                 case 3:
                     break;
@@ -134,7 +135,7 @@ public class Ledger {
             }
         }
     }
-    public void monthToDate() {
+    public static void monthToDate() {
         LocalDate today = LocalDate.now();
         LocalDate firstDay = today.withDayOfMonth(1);
         for(Transaction t : transactions) {
@@ -145,8 +146,29 @@ public class Ledger {
 
         }
     }
-    public void previousMonth(){
+    public static void previousMonth(){
+        LocalDate today = LocalDate.now();
+        int currentMonth = today.getMonthValue();
+        int year = today.getYear();
+
+        int previousMonth;
+        int previousYear;
+        if(currentMonth == 1){
+            previousMonth = 12;
+            previousYear = year-1;
+        }else {
+            previousMonth = currentMonth-1;
+            previousYear = year;
+        }
+        for(Transaction transactionMonth : transactions) {
+            LocalDate dateTime = LocalDate.parse(transactionMonth.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            if (dateTime.getMonthValue() == previousMonth && dateTime.getYear() == previousYear) {
+                System.out.println(transactionMonth);
+            }
+        }
+
 
     }
+
 
 }
