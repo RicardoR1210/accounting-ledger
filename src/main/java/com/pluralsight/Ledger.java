@@ -112,21 +112,21 @@ public class Ledger {
         while (running) {
             System.out.println(reports);
             System.out.print("please enter your choice: ");
-            String choice = scanner.nextLine();
-            choice = choice.toUpperCase();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
             switch (choice) {
-                case "1":
+                case 1:
                     monthToDate();
                     break;
-                case "2":
+                case 2:
                     break;
-                case "3":
+                case 3:
                     break;
-                case "4":
+                case 4:
                     break;
-                case "5":
+                case 5:
                     break;
-                case "0":
+                case 0:
                     running = false;
                     break;
                    default:
@@ -144,6 +144,9 @@ public class Ledger {
             }
 
         }
+    }
+    public void previousMonth(){
+
     }
 
 }
