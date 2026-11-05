@@ -1,15 +1,17 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Ledger {
     private  ArrayList<Transaction> transactions = TransactionFileManager.loadTransactions();
 
     public void displayTransactions() {
         DateTimeFormatter fmt =
-                DateTimeFormatter.ofPattern("yyyy, MM, dd, HH:mm:ss");
+                DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss");
 
         if (transactions.isEmpty()) {
             System.out.println("No transactions found");
@@ -28,7 +30,7 @@ public class Ledger {
                         LocalDateTime dateTime2 = LocalDateTime.parse(dateTime1, fmt);
                         LocalDateTime dateTimeCombined = LocalDateTime.parse(dateTime, fmt);
 
-                        if(dateTimeCombined.compareTo(dateTime2)< 0) {//first transaction happened before the second transaction.
+                        if(dateTimeCombined.isBefore(dateTime2)) {//first transaction happened before the second transaction.
                             //swaping to sort by newest
                             transactions.set(j, getTransaction1);
                             transactions.set(j+1, getTransaction);
@@ -53,6 +55,94 @@ public class Ledger {
             if (t.getAmount() < 0){
                 System.out.println(t);
             }
+        }
+    }
+    public void ledgerMenu() {
+        Scanner scanner = new Scanner(System.in);
+        String menu = """
+                o A) Display All
+                o D) Deposits - Display only the entries that are deposits into the account
+                o P) Payments - Display only the negative entries (or payments)
+                o R) Reports - A new screen that allows the user to run pre-defined reports or
+                o H) Home - go back to the home page
+                """;
+        boolean running = true;
+
+        while (running) {
+            System.out.println(menu);
+            System.out.print("please enter your choice: ");
+            String choice = scanner.nextLine();
+            choice = choice.toUpperCase();
+            switch (choice) {
+                case "A":
+                    displayTransactions();
+                    break;
+
+                case "D":
+                    displayDeposits();
+                    break;
+
+                case "P":
+                    displayPayments();
+                    break;
+                case "R":
+                    reportsMenu();
+                    break;
+                case "H":
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+            }
+
+        }
+    }
+    public void reportsMenu() {
+        Scanner scanner = new Scanner(System.in);
+        String reports = """
+                1) Month To Date
+                2) Previous Month
+                3) Year To Date
+                4) Previous Year
+                5) Search by Vendor - prompt the user for the vendor name and
+                display all entries for that vendor
+                0) Back - go back to the Ledger page
+                """;
+        boolean running = true;
+        while (running) {
+            System.out.println(reports);
+            System.out.print("please enter your choice: ");
+            String choice = scanner.nextLine();
+            choice = choice.toUpperCase();
+            switch (choice) {
+                case "1":
+                    monthToDate();
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                case "5":
+                    break;
+                case "0":
+                    running = false;
+                    break;
+                   default:
+                       System.out.println("Invalid choice");
+            }
+        }
+    }
+    public void monthToDate() {
+        LocalDate today = LocalDate.now();
+        LocalDate firstDay = today.withDayOfMonth(1);
+        for(Transaction t : transactions) {
+            LocalDate dateTime = LocalDate.parse(t.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            if(!dateTime.isBefore(firstDay) && !dateTime.isAfter(today)) {
+                System.out.println(t);
+            }
+
         }
     }
 
