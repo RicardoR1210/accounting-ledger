@@ -169,6 +169,18 @@ public class Ledger {
 
 
     }
+    public static void yearToDate() {
+        LocalDate today = LocalDate.now();
+        LocalDate firstDay = today.withDayOfYear(1);
+        for(Transaction t : transactions) {
+            LocalDate dateTime = LocalDate.parse(t.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            if(!dateTime.isBefore(firstDay) && !dateTime.isAfter(today)) {
+                System.out.println(t);
+            }
+
+        }
+    }
+    
 
 
 }
