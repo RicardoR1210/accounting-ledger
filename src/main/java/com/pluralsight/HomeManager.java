@@ -61,6 +61,7 @@ public static void addDeposit(){
     depositAmount = Math.abs(depositAmount);
     Transaction deposit = new Transaction(date, time, itemDescription, vendorName, depositAmount);
     transactionFileManager.saveTransaction(deposit);
+    Ledger.refreshTransactions();
     System.out.println("Deposit has been saved successfully.");
 
 }
@@ -86,6 +87,7 @@ public static void makePayments(){
     }
     Transaction payment = new Transaction(date, time, itemDescription, vendorName, paymentAmount);
     transactionFileManager.saveTransaction(payment);
+    Ledger.refreshTransactions();
     System.out.println("payment has been saved successfully.");
 
     }
