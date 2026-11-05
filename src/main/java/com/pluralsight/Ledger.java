@@ -199,12 +199,15 @@ public class Ledger {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the vendor name: ");
         String vendorName = scanner.nextLine();
+        boolean vendorFound = false;
         for(Transaction vendorTransaction : transactions) {
             if(vendorTransaction.getVendor().equalsIgnoreCase(vendorName)) {
                 System.out.println(vendorTransaction);
-            }else{
-                System.out.println("Sorry couldn't find this vendor");
+                vendorFound = true;
             }
+        }
+        if(!vendorFound) {
+            System.out.println("Sorry, could not find the vendor name!");
         }
     }
 
