@@ -172,10 +172,10 @@ public class Ledger {
     public static void yearToDate() {
         LocalDate today = LocalDate.now();
         LocalDate firstDay = today.withDayOfYear(1);
-        for(Transaction t : transactions) {
-            LocalDate dateTime = LocalDate.parse(t.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        for(Transaction yearTransaction : transactions) {
+            LocalDate dateTime = LocalDate.parse(yearTransaction.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             if(!dateTime.isBefore(firstDay) && !dateTime.isAfter(today)) {
-                System.out.println(t);
+                System.out.println(yearTransaction);
             }
 
         }
@@ -194,6 +194,16 @@ public class Ledger {
         }
 
 
+    }
+    public static void searchByVendor() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the vendor name: ");
+        String vendorName = scanner.nextLine();
+        for(Transaction vendorTransaction : transactions) {
+            if(vendorTransaction.getVendor().equalsIgnoreCase(vendorName)) {
+                System.out.println(vendorTransaction);
+            }
+        }
     }
 
 
