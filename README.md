@@ -55,3 +55,31 @@ Through this project, I practiced:
 - Working with ArrayLists.
 - Using dates and times.
 - Building menus with loops and switch statements.
+
+  ## Code I'm proud of
+  i really struggled a lot to sort by the newest
+  
+  ```java
+  public static void sortTransactions() {
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    for (int i = 0; i < transactions.size() - 1; i++) {
+        for (int j = 0; j < transactions.size(); j++) {
+
+            Transaction getTransaction = transactions.get(j);
+            Transaction getTransaction1 = transactions.get(j + 1);
+
+            String dateTime = getTransaction.getDate() + " " + getTransaction.getTime();
+            String dateTime1 = getTransaction1.getDate() + " " + getTransaction1.getTime();
+
+            LocalDateTime dateTime2 = LocalDateTime.parse(dateTime1, fmt);
+            LocalDateTime dateTimeCombined = LocalDateTime.parse(dateTime, fmt);
+
+            if (dateTimeCombined.isBefore(dateTime2)) {
+                transactions.set(j, getTransaction1);
+                transactions.set(j + 1, getTransaction);
+            }
+        }
+    }
+}
+```
