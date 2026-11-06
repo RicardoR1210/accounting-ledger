@@ -7,15 +7,17 @@ public class LedgerApp {
         welcomeScreen();
         Thread.sleep(1000);
         homeScreen();
+        goodbyeScreen();
+
 
 
     }
     public static void welcomeScreen(){
-        System.out.println("=======================");
-        System.out.println(" ********************* ");
-        System.out.println(" *Welcome to LedgerApp* ");
-        System.out.println(" ********************** ");
-        System.out.println("=======================");
+        System.out.println("=======================================");
+        System.out.println(" ************************************** ");
+        System.out.println(" *Welcome to the Accounting Ledger App* ");
+        System.out.println(" *************************************");
+        System.out.println("=======================================");
     }
     public static void homeScreen(){
         Ledger ledger = new Ledger();
@@ -51,5 +53,12 @@ public class LedgerApp {
                     System.out.println("Invalid input");
             }
         }
+    }
+    public static void goodbyeScreen(){
+        System.out.println("=======================================");
+        System.out.println(" ************************************** ");
+        System.out.println("*Thanks for using our application!*");
+        System.out.println(" *************************************");
+        System.out.println("=======================================");
     }
 }
