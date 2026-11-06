@@ -17,11 +17,12 @@ public class TransactionFileManager {
             e.printStackTrace();
         }
     }
-    public static ArrayList<Transaction> loadTransactions() {
+    public static ArrayList<Transaction> readTransactions() {
         ArrayList<Transaction> transactions = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader("Transactions.csv"));
             String line;
+            br.readLine();
             while ((line = br.readLine()) != null) {
                 if (!line.isEmpty()) {
                 String[] data = line.split(Pattern.quote("|"));

@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ledger {
-    private static ArrayList<Transaction> transactions = TransactionFileManager.loadTransactions();
+    private static ArrayList<Transaction> transactions = TransactionFileManager.readTransactions();
 
-    public static void refreshTransactions() {
-        transactions = TransactionFileManager.loadTransactions();// to update the list
+    public static void updateTransactions() {
+        transactions = TransactionFileManager.readTransactions();// to update the list
     }
 
     public static void displayTransactions() {
@@ -21,7 +21,9 @@ public class Ledger {
                 System.out.println("Only one transaction found:");
                 System.out.println(transactions.get(0));
             }else {
-
+            for (Transaction t : transactions) {
+                System.out.println(t);
+            }
         }
     }
     public static void sortTransactions() {
