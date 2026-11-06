@@ -10,7 +10,7 @@ public class Ledger {
     private static ArrayList<Transaction> transactions = TransactionFileManager.loadTransactions();
 
     public static void refreshTransactions() {
-        transactions = TransactionFileManager.loadTransactions();
+        transactions = TransactionFileManager.loadTransactions();// to update the list
     }
 
     public static void displayTransactions() {

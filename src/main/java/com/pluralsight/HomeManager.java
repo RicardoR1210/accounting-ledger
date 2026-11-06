@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class HomeManager {
 
 public static void addDeposit(){
-    TransactionFileManager transactionFileManager = new TransactionFileManager();
     Scanner scanner = new Scanner(System.in);
     LocalDate depositDate = LocalDate.now();
     LocalTime depositTime = LocalTime.now();
@@ -26,13 +25,12 @@ public static void addDeposit(){
     scanner.nextLine();
     depositAmount = Math.abs(depositAmount);
     Transaction deposit = new Transaction(date, time, itemDescription, vendorName, depositAmount);
-    transactionFileManager.saveTransaction(deposit);
+    TransactionFileManager.saveTransaction(deposit);
     Ledger.refreshTransactions();
     System.out.println("Deposit has been saved successfully.");
 
 }
 public static void makePayments(){
-    TransactionFileManager transactionFileManager = new TransactionFileManager();
     Scanner scanner = new Scanner(System.in);
     LocalDate paymentDate = LocalDate.now();
     LocalTime paymentTime = LocalTime.now();
@@ -52,7 +50,7 @@ public static void makePayments(){
         paymentAmount *= -1;
     }
     Transaction payment = new Transaction(date, time, itemDescription, vendorName, paymentAmount);
-    transactionFileManager.saveTransaction(payment);
+    TransactionFileManager.saveTransaction(payment);
     Ledger.refreshTransactions();
     System.out.println("payment has been saved successfully.");
 
