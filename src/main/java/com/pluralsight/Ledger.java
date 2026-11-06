@@ -44,9 +44,6 @@ public class Ledger {
                 }
             }
         }
-        for (Transaction t : transactions) {
-            System.out.println(t);
-        }
     }
     public static void displayDeposits() {
         sortTransactions();
@@ -72,8 +69,8 @@ public class Ledger {
                 o A) Display All
                 o D) Deposits
                 o P) Payments
-                o R) Reports 
-                o H) Home 
+                o R) Reports
+                o H) Home
                 *********************************
                 """;
         boolean running = true;

@@ -57,7 +57,7 @@ public class LedgerApp {
     public static void goodbyeScreen(){
         System.out.println("=======================================");
         System.out.println(" ************************************** ");
-        System.out.println("*Thanks for using our application!*");
+        System.out.println(" *     Thanks for using our app!      *");
         System.out.println(" *************************************");
         System.out.println("=======================================");
     }
